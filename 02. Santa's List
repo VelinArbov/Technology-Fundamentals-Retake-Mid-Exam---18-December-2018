@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MidExSanta
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var NoisYName = Console.ReadLine().Split('&');
+            
+            List<string> name = new List<string>();
+            foreach (var names in NoisYName)
+            {
+                name.Add(names);
+            }
+
+            while (true)
+            {
+                string command = Console.ReadLine();
+                if (command == "Finished!")
+                {
+                    break;
+                }
+               
+                string[] commmandNames = command.Split();
+                string currentName = commmandNames[1];
+                string newName = commmandNames[commmandNames.Length-1];
+
+                switch (commmandNames[0])
+                {
+                    
+                    case "Bad":
+                        if (name.Contains(currentName))
+                        {
+                            break;
+
+                        }
+                        else
+                        {
+                            name.Insert(0, currentName);
+                         }
+                        break;
+                    case "Good":
+                        if(name.Contains(currentName))
+                        {
+                            name.Remove(currentName);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        break;
+                    case "Rename":
+                        if (name.Contains(currentName))
+                        {
+
+                            name[name.IndexOf(currentName)] = newName;
+
+
+                        }
+                        else
+                        {
+                                    break;
+                         }
+                                break;
+                    case "Rearrange":
+                        if (name.Contains(currentName))
+                        {
+                            name.Remove(currentName);
+                            name.Insert(name.Count , currentName);
+
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        break;
+
+                }
+
+
+             
+
+
+            }
+            Console.WriteLine(string.Join(", ", name));
+
+        }
+    }
+}
